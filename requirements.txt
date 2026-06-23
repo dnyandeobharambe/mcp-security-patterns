@@ -1,0 +1,27 @@
+# Core
+fastapi
+uvicorn
+httpx
+pydantic
+python-dotenv
+
+# LangChain / LangGraph
+langchain
+langgraph
+langsmith
+
+# AI Models
+anthropic
+google-generativeai
+
+# Security
+python-jose
+cryptography
+
+# Observability
+agentops
+
+# Utilities
+redis
+pytest
+pytest-asyncio
