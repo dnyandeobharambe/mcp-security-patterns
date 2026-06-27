@@ -50,10 +50,10 @@ The boundary must live in the deterministic layer around the model — not insid
 | Pattern | OWASP Risk | Week | Status |
 |---|---|---|---|
 | [MCP01 — Credential Isolation](patterns/MCP01-credential-isolation/) | Token Mismanagement & Secret Exposure | 1 | ✅ Complete |
-| [MCP02 — HITL Authorization Gate](patterns/MCP02-hitl-gate/) | Excessive Permissions & Scope Creep | 2 | 🔄 Coming |
+| [MCP02 — HITL Authorization Gate](patterns/MCP02-hitl-gate/) | Excessive Permissions & Scope Creep | 2 | ✅ Complete |
 | [MCP03 — Content Sanitization](patterns/MCP03-content-sanitization/) | Tool Poisoning & Malicious Instructions | 1 | ✅ Complete |
 | [MCP04 — Supply Chain Verification](patterns/MCP04-supply-chain/) | Software Supply Chain Attacks | 4 | 🔄 Coming |
-| [MCP05/06 — Probabilistic Triage Gate](patterns/MCP05-06-triage-gate/) | Prompt Injection + Intent Subversion | 2 | 🔄 Coming |
+| [MCP05/06 — Probabilistic Triage Gate](patterns/MCP05-06-triage-gate/) | Prompt Injection + Intent Subversion | 2 | ✅ Complete |
 | [MCP07 — OAuth 2.1 Authentication](patterns/MCP07-oauth-auth/) | Insufficient Authentication & Authorization | 3 | 🔄 Coming |
 | [MCP08 — Session Recording & Replay](patterns/MCP08-session-recording/) | Audit & Logging Deficiencies | 1 | ✅ Complete |
 | [MCP09 — Tool Registry Allowlist](patterns/MCP09-tool-registry/) | Shadow MCP Servers | 3 | 🔄 Coming |
@@ -67,7 +67,7 @@ The boundary must live in the deterministic layer around the model — not insid
 | Group | Patterns | Theme | Status |
 |---|---|---|---|
 | [Group 1 — Isolation, Sanitization & Recording](docs/GROUP-01-isolation-sanitization-recording.md) | MCP01, MCP03, MCP08 | Foundational defense layer — no LLM required | ✅ Complete |
-| [Group 2 — Triage & Authorization](docs/GROUP-02-triage-authorization.md) | MCP05/06, MCP02 | Active blocking and human-in-the-loop control | 🔄 Week 2 |
+| [Group 2 — Triage & Authorization](docs/GROUP-02-triage-authorization.md) | MCP05/06, MCP02 | Active blocking and human-in-the-loop control | ✅ Complete |
 | [Group 3 — Registry, Context & Auth](docs/GROUP-03-registry-context-auth.md) | MCP09, MCP10, MCP07 | Who connects, what tools exist, what context is shared | 🔄 Week 3 |
 | [Group 4 — Supply Chain & Full Stack](docs/GROUP-04-supply-chain-fullstack.md) | MCP04, Full Demo | Trust the software, see all patterns together | 🔄 Week 4 |
 
