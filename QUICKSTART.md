@@ -1,6 +1,6 @@
 # Quickstart — 5 Minutes
 
-For CISOs, CTOs, and architects who need the shape of this repo, not the code.
+Quick ummpary for who need the shape of this repo, not the code.
 
 ---
 
