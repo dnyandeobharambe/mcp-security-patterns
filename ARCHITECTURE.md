@@ -93,9 +93,9 @@ Then build so that being jailbroken grants it no new authority.
 
 ---
 
-## Why These Three Patterns Have No LLM
+## Why These Patterns Have No LLM
 
-MCP01, MCP03, and MCP08 contain zero LLM API calls. This is intentional.
+MCP01, MCP02, MCP03, and MCP08 contain zero LLM API calls. This is intentional.
 
 **MCP01 — Credential Isolation:**
 Pure Python. Azure Key Vault + FastAPI.
@@ -117,6 +117,17 @@ The audit layer must be deterministic and immutable.
 An LLM that controls its own audit trail could theoretically
 be manipulated into omitting entries.
 File append operations cannot be reasoned out of.
+
+**MCP02 — HITL Authorization Gate:**
+Pure Python. FastAPI queue + HTML approval page.
+Domain: a telecom IoT fleet of 5,000+ devices, where firmware updates are
+irreversible writes — a bad push bricks a live base station controller.
+The authorization layer must be deterministic because the cost of being
+wrong is a production device, not a wrong answer. The agent reasons about
+which device needs remediation and proposes the write; it is never the
+thing that decides the write executes. Only a human decision, captured
+through a plain `approve` or `reject` form post, can unlock the code path
+that reaches the device API. An LLM cannot be talked into clicking Approve.
 
 ---
 
@@ -140,7 +151,7 @@ The model can think anything. It cannot do anything without permission.
 
 ---
 
-## The Three Patterns Running Right Now
+## The Patterns Running Right Now
 
 ### MCP01 — Credential Isolation
 
@@ -230,9 +241,54 @@ Shows exactly what happened, what the agent saw, what it decided.
 
 ---
 
+### MCP02 — HITL Authorization Gate
+
+**Domain:** Enterprise IoT fleet management at telecom scale — 5,000+
+devices reporting compliance over MQTT, an agent proposing firmware
+remediation, and writes that are irreversible the moment they execute.
+
+**What it prevents:** an agent's write access being used unsupervised.
+A wrong firmware version, a poisoned compliance record, or a reasoning
+loop becomes a "Reject" click instead of a bricked base station controller.
+
+**The attack this blocks:**
+```
+Agent context contains a device record claiming the correct
+firmware is "9.9.9" — a version that was never actually released.
+
+Without MCP02: Agent calls apply_firmware_update, write executes immediately.
+With MCP02: Write is queued. A human sees the proposed version and the
+            agent's reasoning before anything reaches the device API.
+```
+
+**How it works:**
+```
+Agent proposes apply_firmware_update(device_id, target_version)
+        ↓
+Server queues it — returns approval_id, executes nothing
+        ↓
+Human reviews proposed action + agent reasoning at /pending-approvals
+        ↓
+Approve → mock device API call executes, logged as ACTION_EXECUTED
+Reject  → write never happens, logged as HUMAN_DECISION
+```
+
+**Run it:**
+```powershell
+cd patterns/MCP02-hitl-gate
+python server.py
+
+# Terminal 2
+python attack_demo.py        # See writes executing with no gate
+python submit_action.py      # Queue a real write, get an approval_id
+python client.py             # See the full agent + human round trip
+```
+
+---
+
 ## What Comes Next — Patterns with LLM
 
-**MCP05/06 — Probabilistic Triage Gate (Week 2)**
+**MCP05/06 — Probabilistic Triage Gate**
 
 The one pattern that uses an LLM as a security control.
 A small, fast model classifies incoming queries:
@@ -243,13 +299,6 @@ A small, fast model classifies incoming queries:
 Note: Even here, the LLM makes a classification recommendation.
 The routing decision is deterministic Python code.
 The LLM advises. The code decides.
-
-**MCP02 — HITL Authorization Gate (Week 2)**
-
-LangGraph workflow that pauses before write operations.
-Human approves or rejects via Slack webhook.
-The approval decision is human + deterministic code.
-Not the LLM.
 
 ---
 

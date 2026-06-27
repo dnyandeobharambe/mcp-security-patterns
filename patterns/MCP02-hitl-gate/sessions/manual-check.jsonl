@@ -1,0 +1,1 @@
+{"session_id": "manual-check", "step": 1, "event_type": "hitl_gate", "timestamp": "2026-06-26T22:30:41.724958", "data": {"approval_id": "8b035f62-a5a5-47e0-b046-1cd9cfe932e9", "proposed_action": "apply_firmware_update({'device_id': 'D-1099', 'target_version': '3.0.0'})", "agent_reasoning": "sanity check render", "reviewer": "pending"}}

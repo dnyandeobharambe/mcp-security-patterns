@@ -1,0 +1,1 @@
+{"session_id": "6407aadc-ca96-42ee-a1ec-4fd7c41a5418", "step": 1, "event_type": "hitl_gate", "timestamp": "2026-06-26T23:26:02.255858", "data": {"approval_id": "e27ab0a4-cc76-49dd-9635-ebeb4179986c", "proposed_action": "apply_firmware_update({'device_id': 'D-1042', 'target_version': '2.4.0'})", "agent_reasoning": "Device is non-compliant", "reviewer": "pending"}}
