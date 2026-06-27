@@ -1,6 +1,6 @@
 # Quickstart — 5 Minutes
 
-Quick ummpary for who need the shape of this repo, not the code.
+Quick summary for who need the shape of this repo, not the code.
 
 ---
 
