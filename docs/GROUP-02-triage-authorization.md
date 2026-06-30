@@ -265,8 +265,9 @@ Group 1 controls what reaches the agent and records what it does.
 Group 2 actively blocks harmful intent and gates unauthorized writes.
 
 Group 3 (Week 3) adds the perimeter around the connection itself:
-- **MCP07** — OAuth 2.1 authentication: is the caller even who they claim
-  to be, before any of the above gets a chance to run?
+- **MCP07** — AAuth agent identity & request signing: is the caller even
+  who they claim to be, before any of the above gets a chance to run?
+  Cryptographic Ed25519 identity and signed requests, not a bearer token.
 - **MCP09** — Tool registry allowlist: is this MCP server itself
   authorized to exist, deny by default?
 - **MCP10** — Context scoping: does this session's data stay isolated
